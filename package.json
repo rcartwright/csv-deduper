@@ -1,0 +1,20 @@
+{
+  "name": "csv-deduper",
+  "version": "1.0.0",
+  "description": "This program removes duplicate rows from csvs based on finding a duplicate email or phone number.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test-linux": "./node_modules/.bin/mocha",
+    "test-windows": "mocha"
+  },
+  "author": "Rachel Cartwright",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0"
+  }
+}
