@@ -6,10 +6,17 @@ module.exports = {
             const [headerRow, ...rows] = data.split('\r\n');
             const headers = headerRow.split(',');
 
-            return rows.map((row, index) => {
+            const csvObjects = rows.map((row, index) => {
                 const theRow = row.split(',')
                 console.log('theRow', theRow)
+                return theRow.reduce(
+                    (object, value, index) => ({
+                        ...object,
+                        [headers[index]]: value,
+                    }),{}
+                )
             });
+            console.log('csvObjects', csvObjects)
         }); 
     }
 }

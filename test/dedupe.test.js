@@ -7,7 +7,7 @@ const expect = chai.expect;
 describe('Test Suite', function(){
   it('should pass', function(){
   
-    csvContent = readCsv()
+    const csvContent = readCsv()
     console.log('csvContent', csvContent)
     expect(true).to.equal(true);
   });
