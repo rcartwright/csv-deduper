@@ -7,7 +7,7 @@ module.exports = {
         const [headerRow, ...rows] = content.split('\r\n');
         const headers = headerRow.split(delimiter);
 
-        return rows.map((row, index) => 
+        return rows.map((row) => 
             row
             .split(delimiter)
             .reduce(
@@ -19,7 +19,34 @@ module.exports = {
         );
     },
 
-    // writeCSV: () => {
-    //     fs.writeFileSync("./test/test_output.csv", data);
-    // }
+    filterDuplicates: (content, strategy = 'email') => {
+        const newArray = []
+        // sanitize input, remove spaces, make lowercase, etc
+        // if email already exists, don't add row
+        // if phone already exists, don't add row
+        // if same phone and same email exists, don't add row
+        content.forEach((row) => {
+            let indexOf;
+
+            switch (strategy) {
+                case 'email':
+                    indexOf = newArray.findIndex(x => x.email == row.email)
+                    break;
+                case 'phone':
+                    indexOf = newArray.findIndex(x => x.phone == row.phone)
+                case 'both':
+                    indexOf = newArray.findIndex(x => x.email == row.email && x.phone == row.phone)
+            }
+            
+            if (indexOf === -1) {
+                newArray.push(row)
+            }
+        })
+        return newArray
+    },
+    
+    writeCSV: (file, content) => {
+        // create another function that has 2 inputs
+        // return fs.writeFileSync(file, content);
+    }
 }
