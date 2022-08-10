@@ -6,15 +6,15 @@ module.exports = {
         const [headerRow, ...rows] = content.split('\r\n');
         const headers = headerRow.split(',');
 
-        return rows.map((row, index) => {
-            const theRow = row.split(',')
-
-            return theRow.reduce(
+        return rows.map((row, index) => 
+            row
+            .split(',')
+            .reduce(
                 (object, value, index) => ({
                     ...object,
                     [headers[index]]: value,
                 }),{}
             )
-        });
+        );
     }
 }

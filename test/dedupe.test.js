@@ -4,10 +4,13 @@ const {readCsv} = require('../index.js')
 const expect = chai.expect;
 
 
-describe('Test Suite', () => {
-  it('should pass', () => {
+describe('readCsv function', () => {
+  it('should output correct key values', () => {
     const csvContent = readCsv()
-    console.log('csvContent', csvContent)
-    expect(true).to.equal(true);
+
+    expect(csvContent[0]['First Name']).to.equal('Rachel');
+    expect(csvContent[0]['Last Name']).to.equal('Cartwright');
+    expect(csvContent[0]['Email']).to.equal('stormchica@gmail.com');
+    expect(csvContent[0]['Phone']).to.equal('816-377-3519');
   });
 });
