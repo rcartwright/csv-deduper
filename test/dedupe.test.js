@@ -1,11 +1,14 @@
-const csv = require('./test.csv')
 const chai = require('chai');
+const {readCsv} = require('../index.js')
 
 const expect = chai.expect;
 
 
 describe('Test Suite', function(){
   it('should pass', function(){
+  
+    csvContent = readCsv()
+    console.log('csvContent', csvContent)
     expect(true).to.equal(true);
   });
 });
