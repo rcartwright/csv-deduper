@@ -1,14 +1,15 @@
 const fs = require("fs");
 
 module.exports = {
-    readCsv: () => {
-        const content = fs.readFileSync('./test/test.csv', 'utf8')
+    readCsv: (file) => {
+        const content = fs.readFileSync(file, 'utf8')
+        const delimiter = ','
         const [headerRow, ...rows] = content.split('\r\n');
-        const headers = headerRow.split(',');
+        const headers = headerRow.split(delimiter);
 
         return rows.map((row, index) => 
             row
-            .split(',')
+            .split(delimiter)
             .reduce(
                 (object, value, index) => ({
                     ...object,
@@ -16,5 +17,9 @@ module.exports = {
                 }),{}
             )
         );
-    }
+    },
+
+    // writeCSV: () => {
+    //     fs.writeFileSync("./test/test_output.csv", data);
+    // }
 }

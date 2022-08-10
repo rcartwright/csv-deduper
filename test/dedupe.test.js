@@ -6,7 +6,7 @@ const expect = chai.expect;
 
 describe('readCsv function', () => {
   it('should output correct key values', () => {
-    const csvContent = readCsv()
+    const csvContent = readCsv('./test/test.csv')
 
     expect(csvContent[0]['First Name']).to.equal('Rachel');
     expect(csvContent[0]['Last Name']).to.equal('Cartwright');
