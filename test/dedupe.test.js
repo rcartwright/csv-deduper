@@ -25,7 +25,7 @@ describe('readCsv function', () => {
 // });
 
 describe('filterDuplicates function', () => {
-  it('should output correct key values', () => {
+  it('should remove objects that have duplicate emails when strategy is set to email', () => {
     const csvContent = [
       {
         'First Name': 'Rachel',
@@ -41,13 +41,37 @@ describe('filterDuplicates function', () => {
       }
     ]
 
-    const noDups = filterDuplicates(csvContent)
-    console.log('noDups', noDups)
+    const filteredContent = filterDuplicates(csvContent, 'email')
 
-    expect(noDups.length).to.equal(1);
-    expect(noDups[0]['First Name']).to.equal('Rachel')
-    expect(noDups[0]['Last Name']).to.equal('Cartwright')
-    expect(noDups[0]['Email']).to.equal('stormchica@gmail.com')
-    expect(noDups[0]['Phone']).to.equal('816-377-3519')
+    expect(filteredContent.length).to.equal(1);
+    expect(filteredContent[0]['First Name']).to.equal('Rachel')
+    expect(filteredContent[0]['Last Name']).to.equal('Cartwright')
+    expect(filteredContent[0]['Email']).to.equal('stormchica@gmail.com')
+    expect(filteredContent[0]['Phone']).to.equal('816-377-3519')
+  });
+
+  it('should not remove objects that have duplicate phones when strategy is set to email', () => {
+    const csvContent = [
+      {
+        'First Name': 'Rachel',
+        'Last Name': 'Cartwright',
+        'Email': 'email_1@email.com',
+        'Phone': '816-377-3519'
+      },
+      {
+        'First Name': 'Ashley',
+        'Last Name': 'Johnson',
+        'Email': 'email_2@email.com',
+        'Phone': '816-377-3519'
+      }
+    ]
+
+    const filteredContent = filterDuplicates(csvContent, 'email')
+
+    expect(filteredContent.length).to.equal(2);
+    expect(filteredContent[0]['First Name']).to.equal('Rachel')
+    expect(filteredContent[0]['Last Name']).to.equal('Cartwright')
+    expect(filteredContent[0]['Email']).to.equal('email_1@email.com')
+    expect(filteredContent[0]['Phone']).to.equal('816-377-3519')
   });
 });

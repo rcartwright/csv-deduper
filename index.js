@@ -1,5 +1,21 @@
 const fs = require("fs");
 
+function sanitizeField (field) {
+    if (!field)
+        return 'N/A'
+    // format phone numbers
+    // format emails
+    return field.trim().toLowerCase()
+}
+
+function sanitizeName (field) {
+    if (!field)
+        return 'N/A'
+    // format phone numbers
+    // format emails
+    return field.trim()
+}
+
 module.exports = {
     readCsv: (file) => {
         const content = fs.readFileSync(file, 'utf8')
@@ -21,25 +37,36 @@ module.exports = {
 
     filterDuplicates: (content, strategy = 'email') => {
         const newArray = []
-        // sanitize input, remove spaces, make lowercase, etc
-        // if email already exists, don't add row
-        // if phone already exists, don't add row
-        // if same phone and same email exists, don't add row
-        content.forEach((row) => {
+
+        content.map((row) => {
+            const email = sanitizeField(row['Email'])
+            const phone = sanitizeField(row['Phone'])
+            const firstName = sanitizeName(row['First Name'])
+            const lastName = sanitizeName(row['Last Name'])
             let indexOf;
 
             switch (strategy) {
                 case 'email':
-                    indexOf = newArray.findIndex(x => x.email == row.email)
+                    indexOf = newArray.findIndex(x => x['Email'] == email)
                     break;
                 case 'phone':
-                    indexOf = newArray.findIndex(x => x.phone == row.phone)
-                case 'both':
-                    indexOf = newArray.findIndex(x => x.email == row.email && x.phone == row.phone)
+                    indexOf = newArray.findIndex(x => x['Phone'] === phone)
+                    break;
+                case 'email_or_phone':
+                    indexOf = newArray.findIndex(x => x['Email'] == email || x['Phone'] === phone)
+                    break;
             }
             
+            // only add to array when if it doesn't exist
             if (indexOf === -1) {
-                newArray.push(row)
+                newArray.push(
+                    {
+                      'First Name': firstName,
+                      'Last Name': lastName,
+                      'Email': email,
+                      'Phone': phone
+                    }
+                )
             }
         })
         return newArray
