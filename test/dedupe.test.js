@@ -124,4 +124,79 @@ describe('filterDuplicates function', () => {
     expect(filteredContent[0]['Email']).to.equal('email_1@email.com')
     expect(filteredContent[0]['Phone']).to.equal('816-377-3519')
   });
+
+  it('should remove objects that have duplicate phones when strategy is set to email_or_phone', () => {
+    const csvContent = [
+      {
+        'First Name': 'Rachel',
+        'Last Name': 'Cartwright',
+        'Email': 'email_1@email.com',
+        'Phone': '816-377-3519'
+      },
+      {
+        'First Name': 'Ashley',
+        'Last Name': 'Johnson',
+        'Email': 'email_2@email.com',
+        'Phone': '816-377-3519'
+      }
+    ]
+
+    const filteredContent = filterDuplicates(csvContent, 'email_or_phone')
+
+    expect(filteredContent.length).to.equal(1);
+    expect(filteredContent[0]['First Name']).to.equal('Rachel')
+    expect(filteredContent[0]['Last Name']).to.equal('Cartwright')
+    expect(filteredContent[0]['Email']).to.equal('email_1@email.com')
+    expect(filteredContent[0]['Phone']).to.equal('816-377-3519')
+  });
+
+  it('should remove objects that have duplicate emails when strategy is set to email_or_phone', () => {
+    const csvContent = [
+      {
+        'First Name': 'Rachel',
+        'Last Name': 'Cartwright',
+        'Email': 'email_1@email.com',
+        'Phone': '816-377-3519'
+      },
+      {
+        'First Name': 'Ashley',
+        'Last Name': 'Johnson',
+        'Email': 'email_1@email.com',
+        'Phone': '123-888-8785'
+      }
+    ]
+
+    const filteredContent = filterDuplicates(csvContent, 'email_or_phone')
+
+    expect(filteredContent.length).to.equal(1);
+    expect(filteredContent[0]['First Name']).to.equal('Rachel')
+    expect(filteredContent[0]['Last Name']).to.equal('Cartwright')
+    expect(filteredContent[0]['Email']).to.equal('email_1@email.com')
+    expect(filteredContent[0]['Phone']).to.equal('816-377-3519')
+  });
+
+  it('should remove objects that have duplicate emails and duplicate phones when strategy is set to email_or_phone', () => {
+    const csvContent = [
+      {
+        'First Name': 'Rachel',
+        'Last Name': 'Cartwright',
+        'Email': 'email_1@email.com',
+        'Phone': '816-377-3519'
+      },
+      {
+        'First Name': 'Ashley',
+        'Last Name': 'Johnson',
+        'Email': 'email_1@email.com',
+        'Phone': '816-377-3519'
+      }
+    ]
+
+    const filteredContent = filterDuplicates(csvContent, 'phone')
+
+    expect(filteredContent.length).to.equal(1);
+    expect(filteredContent[0]['First Name']).to.equal('Rachel')
+    expect(filteredContent[0]['Last Name']).to.equal('Cartwright')
+    expect(filteredContent[0]['Email']).to.equal('email_1@email.com')
+    expect(filteredContent[0]['Phone']).to.equal('816-377-3519')
+  });
 });
