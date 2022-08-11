@@ -11,12 +11,11 @@ function sanitizeField (field) {
 function sanitizeName (field) {
     if (!field)
         return 'N/A'
-    // format phone numbers
-    // format emails
+
     return field.trim()
 }
 
-module.exports = {
+module.exports = theobject = {
     readCsv: (file) => {
         const content = fs.readFileSync(file, 'utf8')
         const delimiter = ','
@@ -37,6 +36,10 @@ module.exports = {
 
     filterDuplicates: (content, strategy = 'email') => {
         const newArray = []
+        console.log('Thecontent', content)
+        if (!content) {
+            return new Error('the content does not exist')
+        }
 
         content.map((row) => {
             const email = sanitizeField(row['Email'])
@@ -75,5 +78,11 @@ module.exports = {
     writeCSV: (file, content) => {
         // create another function that has 2 inputs
         // return fs.writeFileSync(file, content);
+    },
+
+    sanitizeCsv: (file, strategy) => {
+        const csv = theobject.readCsv(file)
+        const filteredContent = theobject.filterDuplicates(csv, strategy)
+        return filteredContent
     }
 }

@@ -1,5 +1,5 @@
 const chai = require('chai');
-const {readCsv, writeCSV, filterDuplicates} = require('../index.js')
+const {readCsv, writeCSV, filterDuplicates, sanitizeCsv} = require('../index.js')
 
 const expect = chai.expect;
 
@@ -7,6 +7,18 @@ const expect = chai.expect;
 describe('readCsv function', () => {
   it('should output correct key values', () => {
     const csvContent = readCsv('./test/test.csv')
+
+    expect(csvContent[0]['First Name']).to.equal('Rachel');
+    expect(csvContent[0]['Last Name']).to.equal('Cartwright');
+    expect(csvContent[0]['Email']).to.equal('stormchica@gmail.com');
+    expect(csvContent[0]['Phone']).to.equal('816-377-3519');
+  });
+});
+
+describe('sanitizeCsv function', () => {
+  it('should output correct key values', () => {
+    const csvContent = sanitizeCsv('./test/test.csv', 'email')
+    console.log('csvContent', csvContent)
 
     expect(csvContent[0]['First Name']).to.equal('Rachel');
     expect(csvContent[0]['Last Name']).to.equal('Cartwright');
