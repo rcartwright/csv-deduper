@@ -219,7 +219,7 @@ describe('filterDuplicates function', () => {
 
 describe('readCsv function', () => {
   it('should output correct key values', () => {
-    const csvContent = readCsv('./test/stubs/test.csv')
+    const csvContent = readCsv('./test/stubs_and_output/few_records.csv')
 
     expect(csvContent[0]['First Name']).to.equal('Rachel');
     expect(csvContent[0]['Last Name']).to.equal('Cartwright');
@@ -244,8 +244,8 @@ describe('writeCsv function', () => {
         'Phone': '816-888-8888'
       }
     ]
-    writeCSV('./test/output/test_output.csv', csvContent)
-    const updatedCsv = readCsv('./test/output/test_output.csv')
+    const file = writeCSV('./test/stubs_and_output/writeCSV.csv', csvContent)
+    const updatedCsv = readCsv(file)
 
     expect(updatedCsv.length).to.equal(2);
     expect(updatedCsv[0]['First Name']).to.equal('Rachel');
