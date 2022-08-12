@@ -5,7 +5,7 @@ const expect = chai.expect;
 
 describe('readCsv function', () => {
   it('should output correct key values', () => {
-    const csvContent = readCsv('./test/test.csv')
+    const csvContent = readCsv('./test/stubs/test.csv')
 
     expect(csvContent[0]['First Name']).to.equal('Rachel');
     expect(csvContent[0]['Last Name']).to.equal('Cartwright');
@@ -30,7 +30,7 @@ describe('writeCsv function', () => {
         'Phone': '816-888-8888'
       }
     ]
-    const csvFile = writeCSV('./test/test_output.csv', csvContent)
+    const csvFile = writeCSV('./test/output/test_output.csv', csvContent)
     console.log('csvFile', csvFile)
     
   });

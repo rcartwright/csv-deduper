@@ -1,5 +1,5 @@
 const chai = require('chai');
-const sanitizeCsv = require('../index')
+const sanitizeCsv = require('../index').default
 
 const expect = chai.expect;
 
