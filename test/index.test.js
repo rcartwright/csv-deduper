@@ -1,12 +1,12 @@
 const chai = require('chai');
-const sanitizeCsv = require('../index')
+const filterCSV = require('../index')
 const {readCsv} = require('../lib/dedupe')
 
 const expect = chai.expect;
 
-describe('sanitizeCsv function', () => {
+describe('filterCSV function', () => {
   it('should output correct key values', () => {
-    const file = sanitizeCsv('./test/stubs_and_output/many_records.csv', 'email')
+    const file = filterCSV('./test/stubs_and_output/many_records.csv', 'email')
     const updatedCsv = readCsv(file)
 
     expect(updatedCsv.length).to.equal(7);

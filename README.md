@@ -7,7 +7,7 @@ CSV-Deduper
   This is built to import from a csv, then it removes duplicate rows from csvs by finding a duplicate email or phone number depending on which duplicate detection strategy is set. It then creates a new csv with the new filtered data.
 
 ## Use
-  Call sanitizeCsv with the first argument being the directory of the csv that you want to read from and the second argument being the duplicate detection strategy that you want to use. The 3 strategies are email, phone, or email_or_phone.
+  Call filterCSV with the first argument being the directory of the csv that you want to read from and the second argument being the duplicate detection strategy that you want to use. The 3 strategies are email, phone, or email_or_phone.
 
   Note: The csv currently works the following headers: First Name, Last Name, Email, Phone
 
