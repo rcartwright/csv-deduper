@@ -1,5 +1,5 @@
 const chai = require('chai');
-const {readCsv, writeCSV, filterDuplicates} = require('../lib/dedupe')
+const {csvToJson, jsonToCsv, filterDuplicates} = require('../lib/dedupe')
 
 const expect = chai.expect;
 
@@ -217,9 +217,9 @@ describe('filterDuplicates function', () => {
   });
 });
 
-describe('readCsv function', () => {
+describe('csvToJson function', () => {
   it('should output correct key values', () => {
-    const csvContent = readCsv('./test/stubs_and_output/few_records.csv')
+    const csvContent = csvToJson('./test/stubs_and_output/few_records.csv')
 
     expect(csvContent[0]['First Name']).to.equal('Rachel');
     expect(csvContent[0]['Last Name']).to.equal('Cartwright');
@@ -228,7 +228,7 @@ describe('readCsv function', () => {
   });
 });
 
-describe('writeCsv function', () => {
+describe('jsonToCsv function', () => {
   it('should write csv with correct contents', () => {
     const csvContent = [
       {
@@ -244,8 +244,8 @@ describe('writeCsv function', () => {
         'Phone': '816-888-8888'
       }
     ]
-    const file = writeCSV('./test/stubs_and_output/writeCSV.csv', csvContent)
-    const updatedCsv = readCsv(file)
+    const file = jsonToCsv('./test/stubs_and_output/jsonToCsv.csv', csvContent)
+    const updatedCsv = csvToJson(file)
 
     expect(updatedCsv.length).to.equal(2);
     expect(updatedCsv[0]['First Name']).to.equal('Rachel');

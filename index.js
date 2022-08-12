@@ -1,8 +1,8 @@
-const {readCsv, writeCSV, filterDuplicates} = require('./lib/dedupe')
+const {csvToJson, jsonToCsv, filterDuplicates} = require('./lib/dedupe')
 
 module.exports =
     filterCSV = (file, strategy) => {
-        const csv = readCsv(file)
+        const csv = csvToJson(file)
         const filteredContent = filterDuplicates(csv, strategy)
-        return writeCSV(file, filteredContent)
+        return jsonToCsv(file, filteredContent)
     }

@@ -1,13 +1,13 @@
 const chai = require('chai');
 const filterCSV = require('../index')
-const {readCsv} = require('../lib/dedupe')
+const {csvToJson} = require('../lib/dedupe')
 
 const expect = chai.expect;
 
 describe('filterCSV function', () => {
   it('should output correct key values', () => {
     const file = filterCSV('./test/stubs_and_output/many_records.csv', 'email')
-    const updatedCsv = readCsv(file)
+    const updatedCsv = csvToJson(file)
 
     expect(updatedCsv.length).to.equal(7);
     expect(updatedCsv[0]['First Name']).to.equal('Rachel');
