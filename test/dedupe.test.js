@@ -211,6 +211,42 @@ describe('filterDuplicates function', () => {
     expect(filteredContent[0]['Email']).to.equal('email_1@email.com')
     expect(filteredContent[0]['Phone']).to.equal('816-377-3519')
   });
+
+  it('should convert empty values to show as N/A', () => {
+    const csvContent = [
+      {
+        'First Name': 'Rachel',
+        'Last Name': '',
+        'Email': 'email_1@email.com',
+        'Phone': '816-888-6767'
+      }
+    ]
+
+    const filteredContent = filterDuplicates(csvContent, 'phone')
+
+    expect(filteredContent[0]['First Name']).to.equal('Rachel')
+    expect(filteredContent[0]['Last Name']).to.equal('N/A')
+    expect(filteredContent[0]['Email']).to.equal('email_1@email.com')
+    expect(filteredContent[0]['Phone']).to.equal('816-888-6767')
+  });
+
+  it('should remove whitespace', () => {
+    const csvContent = [
+      {
+        'First Name': ' Rachel ',
+        'Last Name': 'Cartwright',
+        'Email': 'email_1@email.com',
+        'Phone': '816-377-3519'
+      }
+    ]
+
+    const filteredContent = filterDuplicates(csvContent, 'phone')
+
+    expect(filteredContent[0]['First Name']).to.equal('Rachel')
+    expect(filteredContent[0]['Last Name']).to.equal('Cartwright')
+    expect(filteredContent[0]['Email']).to.equal('email_1@email.com')
+    expect(filteredContent[0]['Phone']).to.equal('816-377-3519')
+  });
 });
 
 // test other 2 helper functions
