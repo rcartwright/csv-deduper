@@ -36,7 +36,7 @@ module.exports = theobject = {
 
     filterDuplicates: (content, strategy = 'email') => {
         const newArray = []
-        console.log('Thecontent', content)
+
         if (!content) {
             return new Error('the content does not exist')
         }
@@ -76,13 +76,18 @@ module.exports = theobject = {
     },
     
     writeCSV: (file, content) => {
-        // create another function that has 2 inputs
-        // return fs.writeFileSync(file, content);
+        const header = Object.keys(content[0]).join(',')
+        const rows = content.map((_object) => 
+            Object.values(_object).join(',')).join('\n')
+            
+        const csvContent = [header].concat(rows).join('\r\n')
+
+        return fs.writeFileSync(file, csvContent);
     },
 
     sanitizeCsv: (file, strategy) => {
         const csv = theobject.readCsv(file)
         const filteredContent = theobject.filterDuplicates(csv, strategy)
-        return filteredContent
+        return theObject.writeCSV(file, filteredContent)
     }
 }

@@ -15,26 +15,39 @@ describe('readCsv function', () => {
   });
 });
 
-describe('sanitizeCsv function', () => {
-  it('should output correct key values', () => {
-    const csvContent = sanitizeCsv('./test/test.csv', 'email')
-    console.log('csvContent', csvContent)
+// describe('sanitizeCsv function', () => {
+//   it('should output correct key values', () => {
+//     const csvContent = sanitizeCsv('./test/test.csv', 'email')
+//     console.log('csvContent', csvContent)
 
-    expect(csvContent[0]['First Name']).to.equal('Rachel');
-    expect(csvContent[0]['Last Name']).to.equal('Cartwright');
-    expect(csvContent[0]['Email']).to.equal('stormchica@gmail.com');
-    expect(csvContent[0]['Phone']).to.equal('816-377-3519');
-  });
-});
-
-// describe('writeCsv function', () => {
-//   it('should output csv', () => {
-//     const csvContent = readCsv('./test/test.csv')
-//     const csvFile = writeCSV('./test/test_output.csv', csvContent)
-//     console.log('csvFile', csvFile)
-    
+//     expect(csvContent[0]['First Name']).to.equal('Rachel');
+//     expect(csvContent[0]['Last Name']).to.equal('Cartwright');
+//     expect(csvContent[0]['Email']).to.equal('stormchica@gmail.com');
+//     expect(csvContent[0]['Phone']).to.equal('816-377-3519');
 //   });
 // });
+
+describe('writeCsv function', () => {
+  it.only('should output csv', () => {
+    const csvContent = [
+      {
+        'First Name': 'Rachel',
+        'Last Name': 'Cartwright',
+        'Email': 'stormchica@gmail.com',
+        'Phone': '816-377-3519'
+      },
+      {
+        'First Name': 'Ashley',
+        'Last Name': 'Johnson',
+        'Email': 'stormchica@gmail.com',
+        'Phone': '816-888-8888'
+      }
+    ]
+    const csvFile = writeCSV('./test/test_output.csv', csvContent)
+    console.log('csvFile', csvFile)
+    
+  });
+});
 
 describe('filterDuplicates function', () => {
   it('should remove objects that have duplicate emails when strategy is set to email', () => {
@@ -212,3 +225,7 @@ describe('filterDuplicates function', () => {
     expect(filteredContent[0]['Phone']).to.equal('816-377-3519')
   });
 });
+
+// test other 2 helper functions
+// test when some values have nothing
+// test when there's spaces around values
