@@ -3,38 +3,6 @@ const {readCsv, writeCSV, filterDuplicates} = require('../lib/dedupe')
 
 const expect = chai.expect;
 
-describe('readCsv function', () => {
-  it('should output correct key values', () => {
-    const csvContent = readCsv('./test/stubs/test.csv')
-
-    expect(csvContent[0]['First Name']).to.equal('Rachel');
-    expect(csvContent[0]['Last Name']).to.equal('Cartwright');
-    expect(csvContent[0]['Email']).to.equal('stormchica@gmail.com');
-    expect(csvContent[0]['Phone']).to.equal('816-377-3519');
-  });
-});
-
-describe('writeCsv function', () => {
-  it('should output csv', () => {
-    const csvContent = [
-      {
-        'First Name': 'Rachel',
-        'Last Name': 'Cartwright',
-        'Email': 'stormchica@gmail.com',
-        'Phone': '816-377-3519'
-      },
-      {
-        'First Name': 'Ashley',
-        'Last Name': 'Johnson',
-        'Email': 'stormchica@gmail.com',
-        'Phone': '816-888-8888'
-      }
-    ]
-    const csvFile = writeCSV('./test/output/test_output.csv', csvContent)
-    console.log('csvFile', csvFile)
-    
-  });
-});
 
 describe('filterDuplicates function', () => {
   it('should remove objects that have duplicate emails when strategy is set to email', () => {
@@ -249,6 +217,40 @@ describe('filterDuplicates function', () => {
   });
 });
 
-// test other 2 helper functions
-// test when some values have nothing
-// test when there's spaces around values
+describe('readCsv function', () => {
+  it('should output correct key values', () => {
+    const csvContent = readCsv('./test/stubs/test.csv')
+
+    expect(csvContent[0]['First Name']).to.equal('Rachel');
+    expect(csvContent[0]['Last Name']).to.equal('Cartwright');
+    expect(csvContent[0]['Email']).to.equal('stormchica@gmail.com');
+    expect(csvContent[0]['Phone']).to.equal('816-377-3519');
+  });
+});
+
+describe('writeCsv function', () => {
+  it('should write csv with correct contents', () => {
+    const csvContent = [
+      {
+        'First Name': 'Rachel',
+        'Last Name': 'Cartwright',
+        'Email': 'stormchica@gmail.com',
+        'Phone': '816-377-3519'
+      },
+      {
+        'First Name': 'Ashley',
+        'Last Name': 'Johnson',
+        'Email': 'stormchica@gmail.com',
+        'Phone': '816-888-8888'
+      }
+    ]
+    writeCSV('./test/output/test_output.csv', csvContent)
+    const updatedCsv = readCsv('./test/output/test_output.csv')
+
+    expect(updatedCsv.length).to.equal(2);
+    expect(updatedCsv[0]['First Name']).to.equal('Rachel');
+    expect(updatedCsv[0]['Last Name']).to.equal('Cartwright');
+    expect(updatedCsv[0]['Email']).to.equal('stormchica@gmail.com');
+    expect(updatedCsv[0]['Phone']).to.equal('816-377-3519');
+  });
+});
