@@ -1,4 +1,4 @@
-import {csvToJson, jsonToCsv, filterDuplicates} from './lib/dedupe.mjs'
+import {csvToJson, jsonToCsv, filterDuplicates} from './lib/dedupe.js'
 
 const filterCSV = (file, strategy) => {
     const csv = csvToJson(file)

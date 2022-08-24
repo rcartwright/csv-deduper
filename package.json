@@ -1,5 +1,6 @@
 {
   "name": "csv-deduper",
+  "type": "module",
   "version": "1.0.0",
   "description": "This program removes duplicate rows from csvs based on finding a duplicate email or phone number.",
   "main": "index.js",

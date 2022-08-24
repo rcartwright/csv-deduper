@@ -1,5 +1,5 @@
 import chai from'chai'
-import {csvToJson, jsonToCsv, filterDuplicates} from'../lib/dedupe.mjs'
+import {csvToJson, jsonToCsv, filterDuplicates} from'../lib/dedupe.js'
 
 const expect = chai.expect;
 

@@ -1,6 +1,6 @@
 import chai from 'chai'
-import filterCSV from '../index.mjs'
-import {csvToJson} from '../lib/dedupe.mjs'
+import filterCSV from '../index.js'
+import {csvToJson} from '../lib/dedupe.js'
 
 const expect = chai.expect;
 
