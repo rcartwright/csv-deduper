@@ -1,6 +1,6 @@
-const chai = require('chai');
-const filterCSV = require('../index')
-const {csvToJson} = require('../lib/dedupe')
+import chai from 'chai'
+import filterCSV from '../index.mjs'
+import {csvToJson} from '../lib/dedupe.mjs'
 
 const expect = chai.expect;
 

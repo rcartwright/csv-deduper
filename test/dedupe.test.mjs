@@ -1,5 +1,5 @@
-const chai = require('chai');
-const {csvToJson, jsonToCsv, filterDuplicates} = require('../lib/dedupe')
+import chai from'chai'
+import {csvToJson, jsonToCsv, filterDuplicates} from'../lib/dedupe.mjs'
 
 const expect = chai.expect;
 

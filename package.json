@@ -8,8 +8,8 @@
     "test": "test"
   },
   "scripts": {
-    "test-linux": "./node_modules/.bin/mocha",
-    "test-windows": "mocha"
+    "test-linux": "./node_modules/.bin/mocha --experimental-modules",
+    "test-windows": "mocha --experimental-modules"
   },
   "author": "Rachel Cartwright",
   "license": "ISC",
